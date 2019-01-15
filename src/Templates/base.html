@@ -9,8 +9,6 @@
     <meta name="author" content="">
     <title>{% block title %}sample{% endblock %}</title>
     <!-- <title /> -->
-    <link rel="stylesheet" href='{% static "css/base.css" %}'>
-
     <link rel="stylesheet" href='{% static "css/lib/bootstrap.min.css" %}'>
     <link rel="stylesheet" href='{% static "css/lib/font-awesome.min.css" %}'>
     <link rel="stylesheet" href='{% static "css/base.css" %}'>
@@ -19,6 +17,6 @@
 <body>
   <!-- this is body tag -->
   {% block body %}{% endblock %}
-  <script first_project='{% static "js/lib/bootstrap.min.js" %}'></script>
+  <script src='{% static "js/lib/bootstrap.min.js" %}'></script>
 </body>
 </html>
