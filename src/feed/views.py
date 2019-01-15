@@ -6,9 +6,26 @@ def index(request):
     article_list = Article.objects.all()
     hashtag_list = HashTag.objects.all()
 
+    # GET & POST
+    category = request.GET.get("category")
+    hashtag = request.GET.get("hashtag")
+
+    if not category and not hashtag:
+        article_list = Article.objects.all()
+    elif category:
+        article_list = Article.objects.filter(category=category)
+    else:
+        article_list = Article.objects.filter(hashtag__name=hashtag)
+
+    category_list = set([
+        (article.category, article.get_category_display())
+        for article in article_list
+    ])
+
     ctx = {
         "article_list" : article_list,
         "hashtag_list" : hashtag_list,
+        "category_list" : category_list,
     }
     return render(request, "index.html", ctx)
 

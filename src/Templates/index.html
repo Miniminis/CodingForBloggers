@@ -5,7 +5,9 @@
           <h1 class="blog-title">Coding for Bloggers</h1>
           <p class="lead blog-description">The first blog created by Imagineer</p>
   </header>
+</div>
 {% include "navbar.html" %}
+<div class = "container">
   <div class="row">
         <div class="col-md-8 blog-main">
           <div class="blog-post">
@@ -20,11 +22,20 @@
           </div><!-- /.blog-post -->
         </div>
         <aside class="col-md-4 blog-sidebar">
-          <div class="p-3">
-            <h4 class="font-italic">Hashtags</h4>
-            <ol class="list-unstyled mb-0">
+          <div class="sidebar-module">
+            <h4>Categories</h4>
+            <ol class="list-unstyled">
+              <li><a href="/">all</a></li>
+              {% for alias, category in category_list %}
+              <li><a href="/?category={{alias}}">{{category}}</a></li>
+              {% endfor %}
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Hashtags</h4>
+            <ol class="list-unstyled">
               {% for hashtag in hashtag_list %}
-              <li>{{hashtag}}</li>
+              <li><a href="/?hashtag={{hashtag.name}}"">#{{hashtag}}</a></li>
               {% endfor %}
             </ol>
           </div>
