@@ -2,26 +2,48 @@
 {% block body %}
 <div class = "container">
   <header class="blog-header">
-          <h1 class="blog-title">Coding for Bloggers</h1>
+          <h1 class="blog-title">{{ article.title }}</h1>
           <p class="lead blog-description">The first blog created by Imagineer</p>
   </header>
 {% include "navbar.html" %}
   <div class="row">
-        <div class="col-md-8 blog-main">
-          <div class="blog-post">
-            <p> {{article.content}} </p>
-          </div><!-- /.blog-post -->
+      <div class="col-md-8 blog-main">
+        <div class="blog-post">
+          <p> {{article.content}} </p>
+        </div><!-- /.blog-post -->
+        <div>
+          {% for comment in article.article_comments.all %}
+            <div> {{comment.username}} : {{comment.content}}</div>
+          {% endfor %}
         </div>
-        <aside class="col-md-4 blog-sidebar">
-          <div class="sidebar-module">
-            <h4>Hashtags</h4>
-            <ol class="list-unstyled">
-              {% for hashtag in hashtag_list %}
-              <li>{{hashtag}}</li>
-              {% endfor %}
-            </ol>
-          </div>
-        </aside>
+        <div class="reply-form">
+          <form class="form-inline" method="post" action="">
+            {% csrf_token %}
+            <div>
+              <div class="form-group">
+                <input placeholder="아이디" class="form-control" name="username" />
+              </div>
+              <div class="form-group">
+                <input placeholder="내용" class="form-control" name="content" />
+              </div>
+              <div class="form-group">
+                <botton class="btn btn-default" type="submit">댓글달기</botton>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <aside class="col-md-4 blog-sidebar">
+        <div class="sidebar-module">
+          <h4>Hashtags</h4>
+          <ol class="list-unstyled">
+            {% for hashtag in hashtag_list %}
+            <li>{{hashtag}}</li>
+            {% endfor %}
+          </ol>
+        </div>
+        <div class="sidebar-module"></div>
+      </aside>
   </div>
 </div>
 {% endblock %}
